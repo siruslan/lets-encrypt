@@ -19,7 +19,7 @@ var envName = '${env.envName}',
 
 if (customDomain) {
     customDomain = customDomain.split(";").join(" ").split(",").join(" ").replace(/\s+/g, " ").replace(/^\s+|\s+$/gm,'').split(" ");
-    var regex = /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}(\n|$)/
+    var regex = new RegExp ("^\\s*(([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]?(\\.[a-zA-Z0-9-]{1,6})+)+\\s*,\\s*;\\s*)*([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9-]?(.[a-zA-Z0-9-]{1,6})+)$");
     for (var i = 0; i < customDomain.length; i++) {
         if (!regex.test(customDomain[i])) return {result: 99, type:"error", message: "Domain " + customDomain[i] + " is invalid. Please double check specified domains in the External Domains field."}
     }
