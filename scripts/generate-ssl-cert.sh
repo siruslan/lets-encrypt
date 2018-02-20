@@ -2,6 +2,8 @@
 
 [ -f '/opt/letsencrypt/settings'  ] && source '/opt/letsencrypt/settings' || { echo "No settings available" ; exit 3 ; }
 [ -f '/root/validation.sh'  ] && source '/root/validation.sh' || { echo "No validation library available" ; exit 3 ; }
+
+domain=$(idn <<< $domain)
  
 #To be sure that r/w access
 mkdir -p /etc/letsencrypt/

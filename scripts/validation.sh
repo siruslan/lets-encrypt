@@ -27,6 +27,7 @@ function validateDNSSettings(){
     [ -z "$domain" ] && {
         [ -f '/opt/letsencrypt/settings'  ] && source '/opt/letsencrypt/settings' || { echo "Error: no settings available" ; exit 3 ; }
     }
+    domain=$(idn <<< $domain)
 
     domain_list=$(echo $domain | sed "s/,/ /g")
         for single_domain in $domain_list
