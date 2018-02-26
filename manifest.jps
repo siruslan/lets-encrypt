@@ -63,7 +63,7 @@
         "install": {
             "script": "https://raw.githubusercontent.com/jelastic-jps/lets-encrypt/idn-fix/scripts/create-installation-script.js?_r=${fn.random}",
             "params": {
-                "baseDir": "https://raw.githubusercontent.com/jelastic-jps/lets-encrypt/master/scripts",
+                "baseDir": "https://raw.githubusercontent.com/jelastic-jps/lets-encrypt/dev2018/scripts",
                 "cronTime": "0 ${fn.random(1,6)} * * *",
                 "customDomain": "${this.customDomain}"
             }
