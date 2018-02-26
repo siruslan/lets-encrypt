@@ -229,5 +229,5 @@ function SendErrResp(resp){
 }
 
 function SendEmail(title, message){
-  return jelastic.message.email.Send(appid, session, email, email, email, title, message);
+  return jelastic.message.email.Send(appid, session, null, null, email, title, message);
 }
