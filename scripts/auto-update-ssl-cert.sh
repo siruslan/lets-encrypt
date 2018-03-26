@@ -27,10 +27,10 @@ function validateLatestVersion(){
    local latest_revision=$($GIT ls-remote $BASE_REPO_URL | grep master | awk '{ print $1}');
    [ -f "$revision_state_path" ] && current_revision=$(cat $revision_state_path);
    [ "$latest_revision" != "$current_revision" ] && {
-        $WGET $RAW_REPO_SCRIPS_URL/auto-update-ssl-cert.sh -O /tmp/auto-update-ssl-cert.sh
-        $WGET $RAW_REPO_SCRIPS_URL/install-le.sh -O /tmp/install-le.sh
-        $WGET $RAW_REPO_SCRIPS_URL/validation.sh -O /tmp/validation.sh
-        $WGET $RAW_REPO_SCRIPS_URL/generate-ssl-cert.sh -O /tmp/generate-ssl-cert.sh
+        $WGET  --no-check-certificate $RAW_REPO_SCRIPS_URL/auto-update-ssl-cert.sh -O /tmp/auto-update-ssl-cert.sh
+        $WGET  --no-check-certificate $RAW_REPO_SCRIPS_URL/install-le.sh -O /tmp/install-le.sh
+        $WGET  --no-check-certificate $RAW_REPO_SCRIPS_URL/validation.sh -O /tmp/validation.sh
+        $WGET  --no-check-certificate $RAW_REPO_SCRIPS_URL/generate-ssl-cert.sh -O /tmp/generate-ssl-cert.sh
         [  -s /tmp/auto-update-ssl-cert.sh -a -s /tmp/install-le.sh -a -s /tmp/validation.sh -a -s /tmp/generate-ssl-cert.sh ] && {
             mv /tmp/install-le.sh /root/install-le.sh
             mv /tmp/auto-update-ssl-cert.sh  /root/auto-update-ssl-cert.sh
