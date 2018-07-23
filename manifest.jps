@@ -81,10 +81,10 @@ buttons:
     successText: SSL certificate files have been successfully updated!
   - caption: Configure
     settings: main
-    action: install
+    action: installScript
 
 onInstall:
-  install:
+  installScript:
     customDomains: ${settings.customDomains}
     nodeId: ${settings.nodeId}
     nodeGroup: ${settings.nodeGroup}
@@ -101,24 +101,17 @@ onUninstall:
 onBeforeDelete: delete
 
 onAfterClone: 
-  script: |
-    return {
-      result: 0, onAfterReturn: {
-        install: eval('(' + MANIFEST + ')'), 
-        envName: envName, 
-        settings: {
-          customDomains: '', 
-          nodeGroup: '${settings.nodeGroup}', 
-          deployHookType: '${settings.deployHookType}', 
-          undeployHookType: '${settings.undeployHookType}'
-        }
-      }
-    }  
-  params:
-    envName: ${event.response.env.envName}
+  install: ${baseUrl}/manifest.jps?_r=${fn.random}
+  envName: ${event.response.env.envName}
+  settings: 
+    customDomains: ''
+    nodeGroup: ${settings.nodeGroup}
+    deployHookType: ${settings.deployHookType}
+    undeployHookType: ${settings.undeployHookType}
+
    
 actions:
-  install:
+  installScript:
     script: /scripts/create-installation-script.js?_r=${fn.random}
     params:
       scriptName: ${env.envName}-${globals.scriptSufix}
